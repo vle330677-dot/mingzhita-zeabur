@@ -2,6 +2,7 @@ import bcrypt from 'bcryptjs';
 import crypto from 'crypto';
 import type { AppDatabase } from '../db/types';
 import { AuthPack } from '../types';
+import { touchSessionByToken } from '../utils/sessionTouch';
 
 export const hashPassword = async (plain: string) => bcrypt.hash(plain, 10);
 export const verifyPassword = async (plain: string, hash?: string | null) => {
@@ -27,7 +28,7 @@ export function createAuth(db: AppDatabase): AuthPack {
     `).get(token) as any;
     if (!s) return res.status(401).json({ success: false, message: '\u7ba1\u7406\u5458\u4f1a\u8bdd\u5931\u6548' });
 
-    db.prepare(`UPDATE user_sessions SET lastSeenAt = CURRENT_TIMESTAMP WHERE token = ?`).run(token);
+    touchSessionByToken(db, token);
     req.admin = { userId: s.userId, name: s.userName, token: s.token };
     next();
   };
@@ -50,7 +51,7 @@ export function createAuth(db: AppDatabase): AuthPack {
       }
     }
 
-    db.prepare(`UPDATE user_sessions SET lastSeenAt = CURRENT_TIMESTAMP WHERE token = ?`).run(token);
+    touchSessionByToken(db, token);
     req.user = { id: s.userId, name: s.userName, token: s.token };
     next();
   };

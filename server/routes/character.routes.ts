@@ -1,6 +1,7 @@
 ﻿import { Router } from 'express';
 import { AppContext } from '../types';
 import { filterPresenceByLocation, loadOnlinePresenceFallback, loadPresenceByUserId } from '../utils/presence';
+import { touchPlayerSessionsByUserId } from '../utils/sessionTouch';
 
 type AnyRow = Record<string, any>;
 const nowIso = () => new Date().toISOString();
@@ -111,7 +112,7 @@ function resetDailyCountersIfNeeded(db: any, user: AnyRow | undefined) {
 }
 function touchPresence(db: any, userId: number) {
   if (!userId) return;
-  db.prepare(`UPDATE user_sessions SET lastSeenAt = CURRENT_TIMESTAMP WHERE userId = ? AND role = 'player' AND revokedAt IS NULL`).run(userId);
+  touchPlayerSessionsByUserId(db, userId);
 }
 function getLatestIncomingArrestCase(db: any, userId: number) {
   return mapGuardArrestCase(db.prepare(`SELECT * FROM tower_guard_arrest_cases WHERE targetUserId = ? AND status IN ('pending_review','captured') ORDER BY datetime(COALESCE(updatedAt, createdAt)) DESC, id DESC LIMIT 1`).get(userId) as AnyRow | undefined);
@@ -385,11 +386,16 @@ export function createCharacterRouter(ctx: AppContext) {
       if (!locationId) return res.json({ success: true, players: [] });
       if (excludeId) touchPresence(db, excludeId);
 
+      const runtimeWorldPresence = await runtime.getWorldPresence();
+      if (runtimeWorldPresence.length > 0) {
+        return res.json({
+          success: true,
+          players: filterPresenceByLocation(runtimeWorldPresence, locationId, excludeId),
+        });
+      }
+
       const merged = new Map<number, AnyRow>();
       for (const row of filterPresenceByLocation(loadOnlinePresenceFallback(db, ONLINE_WINDOW_SECONDS), locationId, excludeId)) {
-        merged.set(Number(row.id || 0), row as AnyRow);
-      }
-      for (const row of await runtime.getLocationPresence(locationId, excludeId)) {
         merged.set(Number(row.id || 0), row as AnyRow);
       }
 

@@ -1,6 +1,7 @@
 import { Router } from 'express';
 import type { AppContext } from '../types';
 import { loadPresenceByUserId } from '../utils/presence';
+import { touchSessionByToken } from '../utils/sessionTouch';
 
 function nowTime(value: unknown) {
   const raw = String(value || '').trim();
@@ -37,7 +38,7 @@ export function createRealtimeRouter(ctx: AppContext) {
         return res.status(401).json({ success: false, code: 'SESSION_KICKED', message: 'session kicked' });
       }
 
-      db.prepare(`UPDATE user_sessions SET lastSeenAt = CURRENT_TIMESTAMP WHERE token = ?`).run(token);
+      touchSessionByToken(db, token);
 
       res.status(200);
       res.setHeader('Content-Type', 'text/event-stream; charset=utf-8');

@@ -12,11 +12,14 @@ export function createCompatRouter(ctx: AppContext) {
 
   router.get('/world/presence', async (_req, res) => {
     try {
+      const runtimePresence = await runtime.getWorldPresence();
+      if (runtimePresence.length > 0) {
+        const players = runtimePresence.filter((row) => String(row.currentLocation || '').trim());
+        return res.json({ success: true, players });
+      }
+
       const merged = new Map<number, any>();
       for (const row of loadOnlinePresenceFallback(db)) {
-        merged.set(Number(row.id || 0), row);
-      }
-      for (const row of await runtime.getWorldPresence()) {
         merged.set(Number(row.id || 0), row);
       }
       const players = Array.from(merged.values()).filter((row) => String(row.currentLocation || '').trim());
