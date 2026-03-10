@@ -1,0 +1,355 @@
+@import "tailwindcss";
+
+:root {
+  --user-bg-image: none;
+  --ui-font-main: "Noto Serif SC", "PingFang SC", "Microsoft YaHei UI", "Segoe UI", sans-serif;
+  --ui-text-primary: #142032;
+  --ui-text-secondary: #4f6277;
+  --ui-border: rgba(140, 165, 188, 0.35);
+  --ui-panel-strong: rgba(255, 255, 255, 0.72);
+  --ui-panel-soft: rgba(255, 255, 255, 0.48);
+  --ui-bg-main: radial-gradient(circle at 14% 18%, #f6fbff 0%, #edf2ff 42%, #e5ecfb 76%, #dce5f8 100%);
+  --ui-accent: #4d86ff;
+  --ui-accent-soft: #9ab8ff;
+  --ui-danger: #ff5b76;
+  --ui-success: #16a34a;
+  --ui-card-shadow: 0 28px 62px rgba(29, 43, 64, 0.2);
+}
+
+html[data-ui-theme='holy_glass'] {
+  --ui-text-primary: #1b2a43;
+  --ui-text-secondary: #576b83;
+  --ui-border: rgba(129, 152, 186, 0.35);
+  --ui-panel-strong: rgba(255, 255, 255, 0.72);
+  --ui-panel-soft: rgba(255, 255, 255, 0.48);
+  --ui-bg-main: radial-gradient(circle at 16% 14%, #f6f9ff 0%, #f0f4ff 42%, #e8eef9 78%, #dfe7f5 100%);
+  --ui-accent: #4f8eff;
+  --ui-accent-soft: #9cbcfb;
+}
+
+html[data-ui-theme='crystal_glass'] {
+  --ui-text-primary: #162942;
+  --ui-text-secondary: #4a6487;
+  --ui-border: rgba(129, 170, 204, 0.35);
+  --ui-panel-strong: rgba(239, 249, 255, 0.62);
+  --ui-panel-soft: rgba(229, 244, 255, 0.36);
+  --ui-bg-main: radial-gradient(circle at 12% 14%, #eefbff 0%, #dff4ff 38%, #d3ebff 66%, #d1e2fc 100%);
+  --ui-accent: #1e90ff;
+  --ui-accent-soft: #77b7ff;
+}
+
+html[data-ui-theme='pink_sweet'] {
+  --ui-text-primary: #4b2843;
+  --ui-text-secondary: #8f5f82;
+  --ui-border: rgba(224, 149, 196, 0.35);
+  --ui-panel-strong: rgba(255, 236, 246, 0.72);
+  --ui-panel-soft: rgba(255, 214, 237, 0.45);
+  --ui-bg-main: radial-gradient(circle at 15% 12%, #ffe9f5 0%, #ffd8ee 36%, #f6c4e2 70%, #efbad8 100%);
+  --ui-accent: #ff63b0;
+  --ui-accent-soft: #ff9cd0;
+}
+
+html[data-ui-theme='cyber_blue'] {
+  --ui-text-primary: #d8f6ff;
+  --ui-text-secondary: #8bc4d8;
+  --ui-border: rgba(48, 122, 157, 0.55);
+  --ui-panel-strong: rgba(8, 30, 55, 0.74);
+  --ui-panel-soft: rgba(7, 23, 44, 0.48);
+  --ui-bg-main: radial-gradient(circle at 14% 12%, #142f50 0%, #0b213d 34%, #08162d 72%, #050d1c 100%);
+  --ui-accent: #00d8ff;
+  --ui-accent-soft: #4ce4ff;
+}
+
+html[data-ui-theme='wasteland_brown'] {
+  --ui-text-primary: #2f1e13;
+  --ui-text-secondary: #6f513f;
+  --ui-border: rgba(164, 128, 94, 0.38);
+  --ui-panel-strong: rgba(245, 226, 199, 0.7);
+  --ui-panel-soft: rgba(221, 194, 161, 0.46);
+  --ui-bg-main: radial-gradient(circle at 16% 14%, #f2ddbd 0%, #e2c296 36%, #ca9f6d 69%, #a37f54 100%);
+  --ui-accent: #b87437;
+  --ui-accent-soft: #d49a5a;
+}
+
+/* 冰蓝精灵 — sc/1.jpg 冰雪蓝白精灵风 */
+html[data-ui-theme='ice_fairy'] {
+  --ui-text-primary: #1a3a5c;
+  --ui-text-secondary: #4a7aa0;
+  --ui-border: rgba(135, 196, 232, 0.45);
+  --ui-panel-strong: rgba(220, 240, 255, 0.78);
+  --ui-panel-soft: rgba(200, 232, 252, 0.50);
+  --ui-bg-main: radial-gradient(circle at 20% 15%, #e8f7ff 0%, #cdedfb 30%, #b8e2f8 58%, #a4d4f0 100%);
+  --ui-accent: #3aaee0;
+  --ui-accent-soft: #7fcdf0;
+}
+
+/* 苹果甜心 — sc/2.jpg 暖粉红苹果格纹 */
+html[data-ui-theme='apple_sweet'] {
+  --ui-text-primary: #5a1a1a;
+  --ui-text-secondary: #a05050;
+  --ui-border: rgba(210, 100, 100, 0.35);
+  --ui-panel-strong: rgba(255, 236, 230, 0.80);
+  --ui-panel-soft: rgba(255, 218, 210, 0.52);
+  --ui-bg-main: radial-gradient(circle at 18% 12%, #fff0eb 0%, #ffddd5 30%, #f7c5bc 60%, #e8a9a0 100%);
+  --ui-accent: #d94040;
+  --ui-accent-soft: #f07070;
+}
+
+/* 温暖咖啡馆 — sc/3.jpg 羊皮纸米棕 */
+html[data-ui-theme='cafe_parchment'] {
+  --ui-text-primary: #3a2210;
+  --ui-text-secondary: #7a5538;
+  --ui-border: rgba(180, 140, 95, 0.38);
+  --ui-panel-strong: rgba(245, 232, 210, 0.82);
+  --ui-panel-soft: rgba(232, 212, 182, 0.55);
+  --ui-bg-main: radial-gradient(circle at 20% 16%, #f8edd8 0%, #efd8b8 32%, #e0c298 62%, #cba87a 100%);
+  --ui-accent: #9a6030;
+  --ui-accent-soft: #c88a55;
+}
+
+/* 翠绿药草 — sc/4.jpg 植物系淡绿薄荷 */
+html[data-ui-theme='botanical_green'] {
+  --ui-text-primary: #1e3a22;
+  --ui-text-secondary: #4a7052;
+  --ui-border: rgba(110, 170, 120, 0.38);
+  --ui-panel-strong: rgba(220, 242, 222, 0.80);
+  --ui-panel-soft: rgba(195, 230, 200, 0.52);
+  --ui-bg-main: radial-gradient(circle at 18% 14%, #edf8ee 0%, #d4edce 30%, #b8ddb8 60%, #96c898 100%);
+  --ui-accent: #3a8f4a;
+  --ui-accent-soft: #70bc7a;
+}
+
+/* 薰衣草诗境 — sc/5.jpg 薰衣紫水墨东方 */
+html[data-ui-theme='lavender_poem'] {
+  --ui-text-primary: #2e1a40;
+  --ui-text-secondary: #7050a0;
+  --ui-border: rgba(175, 130, 210, 0.38);
+  --ui-panel-strong: rgba(240, 228, 255, 0.80);
+  --ui-panel-soft: rgba(222, 204, 245, 0.52);
+  --ui-bg-main: radial-gradient(circle at 22% 14%, #f2e8ff 0%, #e0cefc 30%, #cdb0f0 60%, #b490d8 100%);
+  --ui-accent: #8a40d0;
+  --ui-accent-soft: #b580f0;
+}
+
+html,
+body,
+#root {
+  min-height: 100%;
+}
+
+body {
+  margin: 0;
+  color: var(--ui-text-primary);
+  font-family: var(--ui-font-main);
+  background-color: #f4f7ff;
+  background-image: var(--user-bg-image), var(--ui-bg-main);
+  background-size: cover, cover;
+  background-position: center, center;
+  background-attachment: fixed, fixed;
+}
+
+.theme-shell {
+  min-height: 100vh;
+  color: var(--ui-text-primary);
+}
+
+.theme-shell [class*="bg-slate-950"],
+.theme-shell [class*="bg-slate-900"],
+.theme-shell [class*="bg-black"],
+.theme-shell [class*="bg-stone-900"],
+.theme-shell [class*="bg-zinc-900"] {
+  background-color: var(--ui-panel-strong) !important;
+  backdrop-filter: blur(18px) saturate(135%);
+  box-shadow: var(--ui-card-shadow);
+}
+
+.theme-shell [class*="bg-slate-800"],
+.theme-shell [class*="bg-slate-700"],
+.theme-shell [class*="bg-gray-900"],
+.theme-shell [class*="bg-gray-800"],
+.theme-shell [class*="bg-stone-800"],
+.theme-shell [class*="bg-zinc-800"] {
+  background-color: var(--ui-panel-soft) !important;
+  backdrop-filter: blur(14px) saturate(128%);
+}
+
+.theme-shell [class*="border-slate-700"],
+.theme-shell [class*="border-slate-800"],
+.theme-shell [class*="border-gray-200"],
+.theme-shell [class*="border-gray-100"],
+.theme-shell [class*="border-black"],
+.theme-shell [class*="border-stone"],
+.theme-shell [class*="border-zinc"] {
+  border-color: var(--ui-border) !important;
+}
+
+.theme-shell [class*="text-slate-100"],
+.theme-shell [class*="text-white"] {
+  color: var(--ui-text-primary) !important;
+}
+
+.theme-shell [class*="text-slate-900"],
+.theme-shell [class*="text-slate-800"],
+.theme-shell [class*="text-slate-700"],
+.theme-shell [class*="text-gray-900"],
+.theme-shell [class*="text-gray-800"],
+.theme-shell [class*="text-gray-700"],
+.theme-shell [class*="text-black"] {
+  color: var(--ui-text-primary) !important;
+}
+
+.theme-shell [class*="text-slate-200"],
+.theme-shell [class*="text-slate-300"],
+.theme-shell [class*="text-gray-300"],
+.theme-shell [class*="text-gray-400"],
+.theme-shell [class*="text-slate-400"],
+.theme-shell [class*="text-slate-500"],
+.theme-shell [class*="text-gray-500"],
+.theme-shell [class*="text-gray-600"] {
+  color: var(--ui-text-secondary) !important;
+}
+
+.theme-shell input:not([type="checkbox"]):not([type="radio"]):not([type="range"]):not([type="color"]):not([type="file"]),
+.theme-shell select,
+.theme-shell textarea {
+  color: var(--ui-text-primary) !important;
+  background-color: var(--ui-panel-soft) !important;
+  border-color: var(--ui-border) !important;
+}
+
+.theme-shell input::placeholder,
+.theme-shell textarea::placeholder {
+  color: var(--ui-text-secondary) !important;
+  opacity: 0.82;
+}
+
+.theme-shell select option {
+  color: var(--ui-text-primary);
+  background-color: var(--ui-panel-strong);
+}
+
+.theme-shell [class*="bg-sky-600"],
+.theme-shell [class*="bg-sky-500"],
+.theme-shell [class*="bg-indigo-600"],
+.theme-shell [class*="bg-indigo-500"] {
+  background: linear-gradient(135deg, var(--ui-accent), var(--ui-accent-soft)) !important;
+  color: #fff !important;
+}
+
+.theme-shell [class*="bg-rose-600"],
+.theme-shell [class*="bg-rose-500"],
+.theme-shell [class*="bg-red-600"] {
+  background: linear-gradient(135deg, var(--ui-danger), #ff8da1) !important;
+  color: #fff !important;
+}
+
+.theme-shell [class*="bg-emerald-600"],
+.theme-shell [class*="bg-emerald-500"] {
+  background: linear-gradient(135deg, var(--ui-success), #4fd37a) !important;
+  color: #fff !important;
+}
+
+.login-shell {
+  background-image: var(--user-bg-image), var(--ui-bg-main);
+  background-size: cover, cover;
+  background-position: center;
+  background-attachment: fixed;
+}
+
+.glass-card {
+  border: 1px solid var(--ui-border);
+  background: var(--ui-panel-strong);
+  backdrop-filter: blur(18px) saturate(135%);
+  box-shadow: var(--ui-card-shadow);
+}
+
+.settings-scroll {
+  max-height: min(70vh, 560px);
+  overflow-y: auto;
+}
+
+@media (max-width: 767px) {
+  .settings-scroll {
+    max-height: 58vh;
+  }
+}
+
+:root {
+  --mobile-portrait-safe-gap: clamp(76px, 16.67dvh, 156px);
+}
+
+.mobile-contrast-surface-light {
+  color: var(--ui-text-primary) !important;
+}
+
+.mobile-contrast-surface-dark {
+  color: var(--ui-text-primary) !important;
+}
+
+@media (max-width: 767px) and (orientation: portrait) {
+  .mobile-portrait-safe-overlay {
+    align-items: flex-start !important;
+    justify-content: center !important;
+    padding-top: var(--mobile-portrait-safe-gap) !important;
+    padding-bottom: var(--mobile-portrait-safe-gap) !important;
+  }
+
+  .mobile-portrait-safe-card {
+    width: min(94vw, 560px) !important;
+    max-height: calc(100dvh - var(--mobile-portrait-safe-gap) * 2) !important;
+    overflow-y: auto !important;
+  }
+
+  .mobile-portrait-safe-sheet {
+    top: var(--mobile-portrait-safe-gap) !important;
+    bottom: var(--mobile-portrait-safe-gap) !important;
+    left: 0.75rem !important;
+    right: 0.75rem !important;
+    max-height: none !important;
+    border-radius: 1.25rem !important;
+  }
+
+  .mobile-portrait-safe-hud {
+    max-height: calc(100dvh - var(--mobile-portrait-safe-gap) * 2) !important;
+  }
+
+  .mobile-portrait-safe-center {
+    padding-top: var(--mobile-portrait-safe-gap) !important;
+    padding-bottom: var(--mobile-portrait-safe-gap) !important;
+  }
+
+  .mobile-portrait-safe-roleplay {
+    left: 50% !important;
+    right: auto !important;
+    top: var(--mobile-portrait-safe-gap) !important;
+    width: min(94vw, 420px) !important;
+    height: calc(100dvh - var(--mobile-portrait-safe-gap) * 2) !important;
+    transform: translateX(-50%) !important;
+  }
+
+  .mobile-portrait-safe-roleplay-min {
+    width: min(94vw, 320px) !important;
+    height: 52px !important;
+  }
+
+}
+
+
+.theme-shell .theme-elevated-surface {
+  border: 1px solid var(--ui-border) !important;
+  background: var(--ui-panel-strong) !important;
+  color: var(--ui-text-primary) !important;
+  backdrop-filter: blur(18px) saturate(135%);
+  box-shadow: var(--ui-card-shadow);
+}
+
+.theme-shell .theme-soft-surface {
+  border: 1px solid var(--ui-border) !important;
+  background: var(--ui-panel-soft) !important;
+  color: var(--ui-text-primary) !important;
+  backdrop-filter: blur(14px) saturate(128%);
+}
+
+.theme-shell .theme-muted-text {
+  color: var(--ui-text-secondary) !important;
+}
